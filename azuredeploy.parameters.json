@@ -1,0 +1,30 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "newStorageAccountName": {
+      "value": "GEN-UNIQUE"
+    },
+    "adminUsername": {
+      "value": "azureuser"
+    },
+    "adminPassword": {
+      "value": "GEN-PASSWORD"
+    },
+    "adVMSize": {
+      "value": "Standard_D2"
+    },
+    "dnsPrefix": {
+      "value": "GEN-UNIQUE"
+    },
+    "publicIPAddressName": {
+      "value": "myPubIp"
+    },
+    "domainName": {
+      "value": "mydomain.local"
+    },
+    "assetLocation": {
+      "value": "https://raw.githubusercontent.com/yusaito001/AzureProject/fdbe6578ca14760a27e38b0f1709cfc71df76e3f/"
+    }
+  }
+}
