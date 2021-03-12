@@ -1,0 +1,46 @@
+{
+ "properties": {
+  "displayName": "Synapse ワークスペースで脆弱性評価を有効にする必要がある",
+  "policyType": "BuiltIn",
+  "mode": "Indexed",
+  "description": "Synapse ワークスペースで定期的な SQL 脆弱性評価スキャンを構成することにより、潜在的な脆弱性を検出、追跡、修復します。",
+  "metadata": {
+   "version": "1.0.0",
+   "category": "Synapse"
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "結果",
+     "description": "ポリシーの実行を有効または無効にします"
+    },
+    "allowedValues": [
+     "AuditIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "AuditIfNotExists"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "equals": "Microsoft.Synapse/workspaces"
+   },
+   "then": {
+    "effect": "[parameters('effect')]",
+    "details": {
+     "type": "Microsoft.Synapse/workspaces/vulnerabilityAssessments",
+     "name": "default",
+     "existenceCondition": {
+      "field": "Microsoft.Synapse/workspaces/vulnerabilityAssessments/recurringScans.isEnabled",
+      "equals": "True"
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Authorization/policyDefinitions/0049a6b3-a662-4f3e-8635-39cf44ace45a",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "0049a6b3-a662-4f3e-8635-39cf44ace45a"
+}

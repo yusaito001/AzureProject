@@ -1,0 +1,45 @@
+{
+ "properties": {
+  "displayName": "Batch アカウントでプライベート エンドポイント接続を有効にする必要がある",
+  "policyType": "BuiltIn",
+  "mode": "Indexed",
+  "description": "プライベート エンドポイント接続を使用すると、ソースとターゲットにパブリック IP アドレスを必要とせずに Batch アカウントへのプライベート接続が有効になり、セキュリティで保護された通信が可能になります。Batch におけるプライベート エンドポイントの詳細については、https://docs.microsoft.com/azure/batch/private-connectivity をご覧ください。",
+  "metadata": {
+   "version": "1.0.0",
+   "category": "Batch"
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "効果",
+     "description": "ポリシーの実行を有効または無効にします"
+    },
+    "allowedValues": [
+     "AuditIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "AuditIfNotExists"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "equals": "Microsoft.Batch/batchAccounts"
+   },
+   "then": {
+    "effect": "[parameters('effect')]",
+    "details": {
+     "type": "Microsoft.Batch/batchAccounts/privateEndpointConnections",
+     "existenceCondition": {
+      "field": "Microsoft.Batch/batchAccounts/privateEndpointConnections/privateLinkServiceConnectionState.status",
+      "equals": "Approved"
+     }
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Authorization/policyDefinitions/009a0c92-f5b4-4776-9b66-4ed2b4775563",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "009a0c92-f5b4-4776-9b66-4ed2b4775563"
+}

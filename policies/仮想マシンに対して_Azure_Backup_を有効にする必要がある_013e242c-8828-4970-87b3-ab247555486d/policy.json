@@ -1,0 +1,41 @@
+{
+ "properties": {
+  "displayName": "仮想マシンに対して Azure Backup を有効にする必要がある",
+  "policyType": "BuiltIn",
+  "mode": "Indexed",
+  "description": "Azure Backup を有効にして、Azure 仮想マシンの保護を確保します。Azure Backup は、セキュリティで保護された、コスト効率の高い、Azure 向けのデータ保護ソリューションです。",
+  "metadata": {
+   "version": "1.0.1",
+   "category": "Backup"
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "結果",
+     "description": "ポリシーの実行を有効または無効にします"
+    },
+    "allowedValues": [
+     "AuditIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "AuditIfNotExists"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "equals": "Microsoft.Compute/virtualMachines"
+   },
+   "then": {
+    "effect": "[parameters('effect')]",
+    "details": {
+     "type": "Microsoft.RecoveryServices/backupprotecteditems"
+    }
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Authorization/policyDefinitions/013e242c-8828-4970-87b3-ab247555486d",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "013e242c-8828-4970-87b3-ab247555486d"
+}
